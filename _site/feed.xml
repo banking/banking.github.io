@@ -6,8 +6,8 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 08 Mar 2016 11:29:54 +0800</pubDate>
-    <lastBuildDate>Tue, 08 Mar 2016 11:29:54 +0800</lastBuildDate>
+    <pubDate>Tue, 08 Mar 2016 11:47:19 +0800</pubDate>
+    <lastBuildDate>Tue, 08 Mar 2016 11:47:19 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -55,10 +55,11 @@
 &lt;strong&gt;解决方案&lt;/strong&gt; ：打开页面后立刻dump memory，并使用mat分析。在Dominator Tree定位异常bitmap对象引用，检查代码修复。&lt;br /&gt;
 &lt;strong&gt;进度&lt;/strong&gt; ：顺风车首页解决了一个误用控件绘制bitmap背景的问题；IM详情页解决了一个过早初始化新手引导图的问题。&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;现有图片瘦身&lt;/strong&gt; 
-打开目标页面，dump memory heap，并用mat分析内存对象。中观察bitmap，定位到图片的代码归属 。建议运营图不要超过1M，全屏浮层图大小不要超过4M。
+打开目标页面，dump memory heap，并用mat分析内存对象。锁定大块bitmap对象，定位到其业务代码归属 。建议运营图不要超过1M，全屏浮层图大小不要超过4M。&lt;br /&gt;
 bitmap在内存中大小计算规则：长&lt;em&gt;宽&lt;/em&gt;单像素内存大小。有alpha通道的RGB_8888单像素占内存4byte,无alpha通道的RGB_565单像素占内存2byte.&lt;br /&gt;
-&lt;strong&gt;解决方案&lt;/strong&gt; ： 所有网络下发的大图采用无alpha通道的jpg格式，而不是png。服务器配置多图，客户端根据手机分辨率拉取合适的图。
-比如顺风车首页运营图，配置两套图，分别为1066&lt;em&gt;526和720&lt;/em&gt;356。UI同事建议，需要保持2/3以上的失真率。1920&lt;em&gt;1080尺寸的手机，可以选择720&lt;/em&gt;356尺寸图，更大尺寸手机选择1066*526。&lt;br /&gt;
+&lt;strong&gt;解决方案&lt;/strong&gt; ： 所有网络下发的大图采用无alpha通道的jpg格式，而不是png。服务器配置多图，客户端根据手机分辨率拉取合适的图。结合UI同事建议，需要保持2/3以上的失真率。&lt;br /&gt;
+以顺风车首页运营图为例，配置两套图，分别为1066x526和720x356。1920x1080屏幕的手机，可以选择720x356图；更大屏幕手机选择1066x526。
+注意长宽一定保持等比拉伸。&lt;br /&gt;
 &lt;strong&gt;进度&lt;/strong&gt; ：目前顺风车首页运营图格式已经优化；图片大小配置需要配合API和UI同事进行。&lt;/li&gt;
 &lt;/ul&gt;
 
