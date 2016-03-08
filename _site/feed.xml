@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>banking acticles</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</description>
+    <link>http://yourdomain.com/</link>
+    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 08 Mar 2016 11:03:27 +0800</pubDate>
+    <lastBuildDate>Tue, 08 Mar 2016 11:03:27 +0800</lastBuildDate>
+    <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 07 Mar 2016 19:57:04 +0800</pubDate>
+        <link>http://yourdomain.com/jekyll/update/2016/03/07/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/jekyll/update/2016/03/07/welcome-to-jekyll.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Android 内存优化方案和总结</title>
+        <description>&lt;h1 id=&quot;activity&quot;&gt;1.Activity内存泄露检查&lt;/h1&gt;
+&lt;p&gt;使用LeakCancary,Memory Dump,Mat分析。  &lt;br /&gt;
+&lt;strong&gt;Memory Dump&lt;/strong&gt;：检测手段最简单。在Package Tree View页面筛选，理论上，检测任何到activity个数&amp;gt;1都应该提出质疑。  &lt;br /&gt;
+&lt;strong&gt;LeakCancary&lt;/strong&gt;：配置方便，也比较准确。Launcher中打开Leaks就可以查看到内存泄露的Activity汇总。  &lt;br /&gt;
+&lt;strong&gt;Mat&lt;/strong&gt;：最全面，但稍显复杂。需要查看Histogram中异常Activity个数，观察手动gc后某些activity是否及时销毁，对业务代码的熟悉程度有较高要求。  &lt;br /&gt;
+&lt;strong&gt;解决方案&lt;/strong&gt; ：相关RD检查代码，是否有持有context引用未释放的情况，并修复之。禁止外部静态单例强引用context.&lt;br /&gt;
+&lt;strong&gt;进度&lt;/strong&gt; ： 目前已经修复SplashActivity内存泄露，IM会话详情Activity内存泄露；乘客详情Activity，司机详情Activity由腾讯地图引起，正在推动解决。&lt;/p&gt;
+
+&lt;h1 id=&quot;bitmap&quot;&gt;2.Bitmap优化异常&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;异常大图对象&lt;/strong&gt; 
+属于代码逻辑错误导致的，在打开某些页面时，进行Memory检测,如果内存有异常增长，可以确认问题存在。&lt;br /&gt;
+&lt;strong&gt;解决方案&lt;/strong&gt; ：打开页面后立刻dump memory，并使用mat分析。在Dominator Tree定位异常bitmap对象引用，检查代码修复。&lt;br /&gt;
+&lt;strong&gt;进度&lt;/strong&gt; ：顺风车首页解决了一个误用控件绘制bitmap背景的问题；IM详情页解决了一个过早初始化新手引导图的问题。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;现有图片瘦身&lt;/strong&gt; 
+打开某些页面，dump memory heap，并用mat分析内存对象。中观察bitmap，定位到图片的代码归属 。建议运营图不要超过1M，全屏浮层图大小不要超过4M。
+bitmap在内存中大小计算规则：长&lt;em&gt;宽&lt;/em&gt;单像素内存大小。有alpha通道的RGB_8888单像素占内存4byte,无alpha通道的RGB_565单像素占内存2byte.&lt;br /&gt;
+&lt;strong&gt;解决方案&lt;/strong&gt; ： 所有网络下发的大图采用无alpha通道的jpg格式，而不是png。服务器配置多图，客户端根据手机分辨率拉取合适的图。
+比如顺风车首页运营图，配置两套图，分别为1066&lt;em&gt;526和720&lt;/em&gt;356。UI同事建议，需要保持2/3以上的失真率。1920&lt;em&gt;1080尺寸的手机，可以选择720&lt;/em&gt;356尺寸图，更大尺寸手机选择1066*526。&lt;br /&gt;
+&lt;strong&gt;进度&lt;/strong&gt; ：目前顺风车首页运营图格式已经优化；图片大小配置需要配合API和UI同事进行。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;3.代码层面优化。&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;store优化&lt;/strong&gt;&lt;br /&gt;
+TheOne框架引中，引入了store管理activity逻辑的代码架构。提供了快速创建Sotre单例的方式:SingletonHolder.getInstance(XXX.class)。
+但是SingletonHolder用了强引用的方式缓存了sore对象，导致store会一直存在于内存中。&lt;br /&gt;
+&lt;strong&gt;解决方案&lt;/strong&gt; ：
+1.如果store为单个activity服务，建议不采用单例方式，直接new来创建store对象&lt;br /&gt;
+2.如果store为多个activity服务，必须有clear方法，结合业务需求清除store内部的数据和对象。在某些业务逻辑触发后（比如发单成功后清理PublishStroe)。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;其他代码层面优化&lt;/strong&gt;&lt;br /&gt;
+减少静态单例使用。静态单例多在工具类中出现，视业务区分，不要过度使用静态单例，并注意适时回收。&lt;br /&gt;
+减少enum使用，使用SparseArray取代Map等。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;omegaoom-&quot;&gt;4.跟踪Omega线上异常，在触发OOM 节点检查代码。&lt;/h1&gt;
+&lt;p&gt;触发oom肯定这时需要大量的内存分配，才会发生OOM错误。&lt;br /&gt;
+以顺风车为例。前三项OOM异常，分别是：   &lt;br /&gt;
+（1）IM详情页OnCreate时触发。  &lt;br /&gt;
+（2）订单详情页OnCreate时触发。   &lt;br /&gt;
+（3） 网络解析response json时触发。  &lt;br /&gt;
+内存优化是否成功的检查唯一标准，一定是线上OOM爆发量是否减少。所以在触发OOM的节点，一点也要做细致的code review。&lt;br /&gt;
+&lt;strong&gt;进度&lt;/strong&gt;：目前在三处都检查到了一些问题，做以下优化。&lt;br /&gt;
+（1）IM详情页 发现了一个进入页面后所有gif表情，轮播多次的异常逻辑。已修复。&lt;br /&gt;
+（2）订单详情页 有内存泄露情况发生。&lt;br /&gt;
+（3）列表页pageNum = 30 导致回文过大（目前是160KB)，考虑优化pageNum = 15。&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 07 Mar 2016 19:57:04 +0800</pubDate>
+        <link>http://yourdomain.com/jekyll/update/2016/03/07/android-memory-optimize.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/jekyll/update/2016/03/07/android-memory-optimize.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+  </channel>
+</rss>
