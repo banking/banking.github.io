@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>banking acticles</title>
-    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+    <description>I am a Newcomer @ git.io-jekyll.
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 08 Mar 2016 11:03:27 +0800</pubDate>
-    <lastBuildDate>Tue, 08 Mar 2016 11:03:27 +0800</lastBuildDate>
+    <pubDate>Tue, 08 Mar 2016 11:29:54 +0800</pubDate>
+    <lastBuildDate>Tue, 08 Mar 2016 11:29:54 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -55,7 +55,7 @@
 &lt;strong&gt;解决方案&lt;/strong&gt; ：打开页面后立刻dump memory，并使用mat分析。在Dominator Tree定位异常bitmap对象引用，检查代码修复。&lt;br /&gt;
 &lt;strong&gt;进度&lt;/strong&gt; ：顺风车首页解决了一个误用控件绘制bitmap背景的问题；IM详情页解决了一个过早初始化新手引导图的问题。&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;现有图片瘦身&lt;/strong&gt; 
-打开某些页面，dump memory heap，并用mat分析内存对象。中观察bitmap，定位到图片的代码归属 。建议运营图不要超过1M，全屏浮层图大小不要超过4M。
+打开目标页面，dump memory heap，并用mat分析内存对象。中观察bitmap，定位到图片的代码归属 。建议运营图不要超过1M，全屏浮层图大小不要超过4M。
 bitmap在内存中大小计算规则：长&lt;em&gt;宽&lt;/em&gt;单像素内存大小。有alpha通道的RGB_8888单像素占内存4byte,无alpha通道的RGB_565单像素占内存2byte.&lt;br /&gt;
 &lt;strong&gt;解决方案&lt;/strong&gt; ： 所有网络下发的大图采用无alpha通道的jpg格式，而不是png。服务器配置多图，客户端根据手机分辨率拉取合适的图。
 比如顺风车首页运营图，配置两套图，分别为1066&lt;em&gt;526和720&lt;/em&gt;356。UI同事建议，需要保持2/3以上的失真率。1920&lt;em&gt;1080尺寸的手机，可以选择720&lt;/em&gt;356尺寸图，更大尺寸手机选择1066*526。&lt;br /&gt;
@@ -80,7 +80,7 @@ TheOne框架引中，引入了store管理activity逻辑的代码架构。提供�
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;omegaoom-&quot;&gt;4.跟踪Omega线上异常，在触发OOM 节点检查代码。&lt;/h1&gt;
-&lt;p&gt;触发oom肯定这时需要大量的内存分配，才会发生OOM错误。&lt;br /&gt;
+&lt;p&gt;触发oom时一般会需要大量的内存分配，才导致OOM错误。&lt;br /&gt;
 以顺风车为例。前三项OOM异常，分别是：   &lt;br /&gt;
 （1）IM详情页OnCreate时触发。  &lt;br /&gt;
 （2）订单详情页OnCreate时触发。   &lt;br /&gt;
