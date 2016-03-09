@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>banking acticles</title>
-  <meta name="description" content="I am a Newcomer @ git.io-jekyll.
-">
+  <title>Android 内存优化方案和总结</title>
+  <meta name="description" content="整理一下顺风车4.2.4内存优化案例,和方法总结。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://yourdomain.com/">
+  <link rel="canonical" href="http://yourdomain.com/jekyll/update/2016/03/07/memory-optimize-example.html">
   <link rel="alternate" type="application/rss+xml" title="banking acticles" href="http://yourdomain.com/feed.xml">
 </head>
 
@@ -55,41 +54,69 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Android 内存优化方案和总结</h1>
+    <p class="post-meta"><time datetime="2016-03-07T19:57:04+08:00" itemprop="datePublished">Mar 7, 2016</time></p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Mar 7, 2016</span>
+  <div class="post-content" itemprop="articleBody">
+    <p>整理一下顺风车4.2.4内存优化案例,和方法总结。</p>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/03/07/memory-optimize-example.html">Android 内存优化方案和总结</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Mar 7, 2016</span>
+<h1 id="section">1.首页优化运营图背景</h1>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/03/07/welcome-to-jekyll.html">Welcome to Jekyll!</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Mar 7, 2016</span>
+<p>第一次通过Mat分析观察到了异常Bitmap对象,猜测和首页运营图相关。
+<img src="http://121.42.160.4:8081/memoryleak/EntranceFragment_image_exception1.png" alt="place holder" />
+<img src="http://121.42.160.4:8081/memoryleak/EntranceFragment_image_exception2.png" alt="place holder" />
+qi
+可以看到已经定位到了业务代码BtsHomeImageView。继续跟进这个控件，可以看到其父类BezelImageView在初始化时创建了一个bitmap作为背景。
+<img src="http://121.42.160.4:8081/memoryleak/EntranceFragment_image_exception3.png" alt="place holder" /></p>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/03/07/android-memory-optimize.html">Android 内存优化方案和总结</a>
-        </h2>
-      </li>
-    
-  </ul>
+<p>这是一个控件误用问题。BezelImageView通过画布裁切实现圆角效果，画布会一直保持mCacheBitmap的引用，不可为大图imageView使用。</p>
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+<h1 id="splashactiviy">2.SplashActiviy内存泄露优化</h1>
 
-</div>
+<p>SplashActivity的内存泄露是很严重的问题，会一直持有闪屏图引用。同样是在类似页面有发现，同时LeakCancary也有提醒。<br />
+<img src="http://121.42.160.4:8081/memoryleak/SplashActivity_LeakCancary.jpg" alt="place holder" />
+<img src="http://121.42.160.4:8081/memoryleak/SplashActivity_Leak.png" alt="place holder" /></p>
+
+<p><img src="http://121.42.160.4:8081/memoryleak/SplashActivity_Leak2.png" alt="place holder" /></p>
+
+<p>问题分析：广告的数据库,AdDbHelper是个单例,一直持有Activity,没有释放。
+最新的release SDk已经修复该问题。</p>
+
+<h1 id="section-1">3.首页优化运营图大小</h1>
+
+<p>运营图在mat中的bitmap在这里。</p>
+
+<p>发现一个奇怪的问题，第一次网络拉取运营图，RGB_8888,尺寸2242928
+第二次显示本地图，RGB_565,尺寸1121464。</p>
+
+<p>出现该问题的原因是gradle的一个特性。Prefer_Value 并不是真实value.</p>
+
+<p>基于此做了一些测试，以下是小图显示效果。</p>
+
+<p>具体配置见上篇文章，传送门。</p>
+
+<h1 id="section-2">4.详情页内存泄露优化</h1>
+
+<p>非常简单的方法。来回切换10次，内存稳步增加，基本可以确定是泄露了</p>
+
+<p>以BtsOrderDetailForDriverActivity内存泄露为例。每个实例占用150K空间</p>
+
+<h1 id="immessageactivity">5.IMMessageActivity引导图优化。</h1>
+
+<h1 id="immessageactivity-1">6.IMMessageActivity内存泄露优化。</h1>
+
+<h1 id="mat">7.附MAT使用说明</h1>
+
+<p>此工具只能显示java层面的，而不能显示Ｃ层的内存占用信息。</p>
+
+
+  </div>
+
+</article>
 
       </div>
     </div>
