@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Android 内存优化方案和总结</title>
-  <meta name="description" content="整理一下顺风车4.2.4内存优化案例,和方法总结。">
+  <title>Android 内存优化案例</title>
+  <meta name="description" content="整理一下顺风车4.2.4版本中的内存优化案例。">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://yourdomain.com/jekyll/update/2016/03/07/memory-optimize-example.html">
@@ -57,20 +57,22 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Android 内存优化方案和总结</h1>
+    <h1 class="post-title" itemprop="name headline">Android 内存优化案例</h1>
     <p class="post-meta"><time datetime="2016-03-07T19:57:04+08:00" itemprop="datePublished">Mar 7, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>整理一下顺风车4.2.4内存优化案例,和方法总结。</p>
+    <p>整理一下顺风车4.2.4版本中的内存优化案例。</p>
 
 <h1 id="section">1.首页优化运营图背景</h1>
 
 <p>第一次通过Mat分析观察到了异常Bitmap对象,猜测和首页运营图相关。
-<img src="http://121.42.160.4:8081/memoryleak/EntranceFragment_image_exception1.png" alt="place holder" />
-<img src="http://121.42.160.4:8081/memoryleak/EntranceFragment_image_exception2.png" alt="place holder" />
-qi
-可以看到已经定位到了业务代码BtsHomeImageView。继续跟进这个控件，可以看到其父类BezelImageView在初始化时创建了一个bitmap作为背景。
+<img src="http://121.42.160.4:8081/memoryleak/EntranceFragment_image_exception1.png" alt="place holder" /></p>
+
+<p>下面可以看到已经定位到了业务代码BtsHomeImageView。
+<img src="http://121.42.160.4:8081/memoryleak/EntranceFragment_image_exception2.png" alt="place holder" /></p>
+
+<p>继续跟进这个控件，可以看到其父类BezelImageView在初始化时创建了一个bitmap作为背景。
 <img src="http://121.42.160.4:8081/memoryleak/EntranceFragment_image_exception3.png" alt="place holder" /></p>
 
 <p>这是一个控件误用问题。BezelImageView通过画布裁切实现圆角效果，画布会一直保持mCacheBitmap的引用，不可为大图imageView使用。</p>
@@ -79,39 +81,59 @@ qi
 
 <p>SplashActivity的内存泄露是很严重的问题，会一直持有闪屏图引用。同样是在类似页面有发现，同时LeakCancary也有提醒。<br />
 <img src="http://121.42.160.4:8081/memoryleak/SplashActivity_LeakCancary.jpg" alt="place holder" />
-<img src="http://121.42.160.4:8081/memoryleak/SplashActivity_Leak.png" alt="place holder" /></p>
-
-<p><img src="http://121.42.160.4:8081/memoryleak/SplashActivity_Leak2.png" alt="place holder" /></p>
+仍然是使用Mat追踪问题：
+<img src="http://121.42.160.4:8081/memoryleak/SplashActivity_Leak.png" alt="place holder" />
+<img src="http://121.42.160.4:8081/memoryleak/SplashActivity_Leak2.png" alt="place holder" /></p>
 
 <p>问题分析：广告的数据库,AdDbHelper是个单例,一直持有Activity,没有释放。
-最新的release SDk已经修复该问题。</p>
+最新的theone-SDk 4.3.27已经修复该问题。</p>
 
 <h1 id="section-1">3.首页优化运营图大小</h1>
 
-<p>运营图在mat中的bitmap在这里。</p>
+<p>运营图在mat中的bitmap在这里。
+<img src="http://121.42.160.4:8081/memoryleak/Home_Operation_bitmap.png" alt="place holder" /></p>
 
-<p>发现一个奇怪的问题，第一次网络拉取运营图，RGB_8888,尺寸2242928
-第二次显示本地图，RGB_565,尺寸1121464。</p>
+<p>发现一个奇怪的问题，第一次网络拉取运营图，RGB_8888,大小2242928byte.
+第二次显示本地图，RGB_565,大小1121464byte。
+回溯了一下glide源码，出现该问题的原因是gilde的一个特性。代码如下：
+<img src="http://121.42.160.4:8081/memoryleak/glide_prefer.png" alt="place holder" /></p>
 
-<p>出现该问题的原因是gradle的一个特性。Prefer_Value 并不是真实value.</p>
+<p>后面有想过针对图片大小做优化，基于此做了一些测试，以下是小图显示效果，对比如下:
+<img src="http://121.42.160.4:8081/memoryleak/Operation_scale.png" alt="place holder" /></p>
 
-<p>基于此做了一些测试，以下是小图显示效果。</p>
-
-<p>具体配置见上篇文章，传送门。</p>
+<p>具体配置标准见<a href="http://banking.github.io/jekyll/update/2016/03/07/android-memory-optimize.html">上篇文章</a>。</p>
 
 <h1 id="section-2">4.详情页内存泄露优化</h1>
 
-<p>非常简单的方法。来回切换10次，内存稳步增加，基本可以确定是泄露了</p>
+<p>对于首页，详情页这样负责的页面，检查内存泄露有更简单的方法。
+多次进入目标页面并返回，内存稳步增加，基本可以确定是泄露了。
+初始内存：
+<img src="http://121.42.160.4:8081/memoryleak/Memory_check.png" alt="place holder" /></p>
 
-<p>以BtsOrderDetailForDriverActivity内存泄露为例。每个实例占用150K空间</p>
+<p>进入页面十几次后内存：
+<img src="http://121.42.160.4:8081/memoryleak/Memory_check2.png" alt="place holder" /></p>
+
+<p>以BtsOrderDetailForDriverActivity内存泄露为例,Dump内存后可以看到内存中一直存在多个实例。
+<img src="http://121.42.160.4:8081/memoryleak/Memory_check3.jpg" alt="place holder" /></p>
+
+<p>每个实例占用150K空间。
+<img src="http://121.42.160.4:8081/memoryleak/Memory_check4.jpg" alt="place holder" /></p>
+
+<p>如果内存泄露暂时无法处理。保底方案：在Activity onDestory时候从view的rootview开始，递归释放所有子view涉及的图片，背景，DrawingCache，监听器等等资源，让Activity成为一个不占资源的空壳，泄露了也不会导致图片资源被持有。
+详文在<a href="https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&amp;mid=400656149&amp;idx=1&amp;sn=122b4f4965fafebf78ec0b4fce2ef62a&amp;scene=1&amp;srcid=0304Y3NE2XzzpXnciVmy8V3p&amp;key=710a5d99946419d991561737ff21afe36087e30f7048e503c104b3e7f52184650009e924294d02ce511f14198c71a882&amp;ascene=0&amp;uin=MjQxMDYzNTU%3D&amp;devicetype=iMac+MacBookAir5%2C2+OSX+OSX+10.11.3+build(15D21)&amp;version=11000003&amp;pass_ticket=C1SGUVOM%2FbWwXCSLYZ6k4PrmyBNZxI5EE66XuGZcRjk%3D">这里</a>。</p>
 
 <h1 id="immessageactivity">5.IMMessageActivity引导图优化。</h1>
+<p>进入IM页面OOM崩溃问题是上版本的顽疾。初次进入发现激增20M内存，必然存在严重内存问题。
+分析发现有异常大图出现。
+<img src="http://121.42.160.4:8081/memoryleak/IMMessageActivity_Guide_Exception1.png" alt="place holder" />
+发现是一个引导图对象，属于初始化加载错误。
+<img src="http://121.42.160.4:8081/memoryleak/IMMessageActivity_Guide_Exception2.png" alt="place holder" /></p>
 
 <h1 id="immessageactivity-1">6.IMMessageActivity内存泄露优化。</h1>
-
-<h1 id="mat">7.附MAT使用说明</h1>
-
-<p>此工具只能显示java层面的，而不能显示Ｃ层的内存占用信息。</p>
+<p>IMMessageActivity页面存在多处内存泄露。引发原因多是（匿名）内部类持有activity引用没有释放引起。
+比如这个：
+<img src="http://121.42.160.4:8081/memoryleak/IMMessageActivity_Leak.png" alt="place holder" />
+在Activity的OnDestroy时及时解除引用就可以了。</p>
 
 
   </div>
