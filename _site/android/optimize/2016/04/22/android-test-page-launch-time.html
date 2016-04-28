@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Welcome to Jekyll!</title>
-  <meta name="description" content="I am new to jekyll.">
+  <title>Android测量页面启动时间</title>
+  <meta name="description" content="1.Activity启动时间">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://yourdomain.com/jekyll/update/2016/03/07/welcome-to-jekyll.html">
+  <link rel="canonical" href="http://yourdomain.com/android/optimize/2016/04/22/android-test-page-launch-time.html">
   <link rel="alternate" type="application/rss+xml" title="banking acticles" href="http://yourdomain.com/feed.xml">
 </head>
 
@@ -57,23 +57,76 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Welcome to Jekyll!</h1>
-    <p class="post-meta"><time datetime="2016-03-07T19:57:04+08:00" itemprop="datePublished">Mar 7, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">Android测量页面启动时间</h1>
+    <p class="post-meta"><time datetime="2016-04-22T11:12:05+08:00" itemprop="datePublished">Apr 22, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>I am new to jekyll.</p>
+    <h1 id="activity">1.Activity启动时间</h1>
 
-<p>这里记载一下Jekyll的使用方法。</p>
+<p>Activity启动时会有onCreate/onStart/onResume这些回调，片面的在onResume回调时就认为Activity启动完成是不准确的。因为这时并没有真正执行View.onInflate().对于用户体验而言，应该归结到View第一帧绘制完成。参考<a href="https://www.zhihu.com/question/35487841">这里</a>。 <br />
+以下的统计方法，都是以View绘制完成作为启动时间统计标准的。 <br />
+实际中，建议统计结果为5次的平均值。</p>
 
-<p>1.Rakefile拷贝自这里：https://github.com/chenxsan/chenxsan.github.io/blob/master/Rakefile
-需要新建时，在根目录下执行 rake new.按照提示步骤输入即可。</p>
+<p><strong>1.ActivityManager Log.</strong>  <br />
+Android系统的ActivityManager提供了Activity页面启动时间参数日志。  <br />
+统计方法:在debug日志中，筛选包含”ActivityManager: Displayed”字符串的日志。 <br />
+页面理想参数:350ms. <br />
+该日志统计的是Activity从启动到页面绘制完成时间,关于ActivityManager统计时间细节，参考<a href="http://stackoverflow.com/questions/32844566/what-does-i-activitymanager-displayed-activity-850ms-comprised-of">这里</a>。</p>
 
-<p>2.jekyll server 可以在localhost:4000看到文章预览效果</p>
+<p><strong>2.adb shell am</strong>  <br />
+adb shell start是一项adb常用命令，可以外部调起方式调起Activity,Service,Broadcast等组件。 <br />
+需要注意，Activity必须要在Minifest注册时加export = “true”才可以；该属性管理Activity的外部调起权限。<br />
+命令示例：adb shell am start -W -n “com.sdu.app.debug/com.sdu.app.MainActivity”  <br />
+输出示例： <br />
+<img src="/assets/ActivityManager.png" alt="Alt text" /> <br />
+ -W: wait for launch to complete 等待加载完成并输出日志  <br />
+参数说明：优先使用waittime作为结果（需要Android 5.0以上）；未输出waittime使用totaltime作为启动Activity的耗时统计结果。 <br />
+适合统计应用程序启动时间的场景。如果应用有一些广告页，可以绕过广告页直接加载MainActivity，得到真实的启动耗时参数。</p>
 
-<p>3.jekyll build 构建文章。md –&gt; html</p>
+<p><strong>3.adb shell screenrecord</strong> <br />
+通过录屏方式分析启动时间。
+http://www.jianshu.com/p/b3502562e55e <br />
+http://graphics-geek.blogspot.sg/2015/10/measuring-activity-startup-time.html?m=1</p>
 
-<p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+<p>命令示例。
+1.开始录屏
+adb shell screenrecord –bugreport /sdcard/video.mp4</p>
+
+<p>2.停止录屏 control+c.</p>
+
+<p>3.adb pull /sdcard/video.mp4 ~/Desktop/video.mp4</p>
+
+<h1 id="fragment">2.Fragment启动时间</h1>
+
+<p><strong>1.adb shell am</strong> <br />
+fragment在开发中也是广泛使用，有时有需求需要统计fragment的启动时间。 <br />
+在OnCreate中埋点作为启动开始时间。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@Override
+public void onCreate(Bundle savedInstanceState) {
+	long startTime = System.currentTimeMillis();   
+    super.onCreate(savedInstanceState);
+}
+</code></pre>
+</div>
+
+<p>在View.post中埋点作为启动结束时间。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>public View onCreateView(...) {
+    rootView = inflater.inflate(getLayoutId(), container, false);
+    rootView.post(new Runnable() {
+        @Override
+        public void run() {
+			long endTime = System.currentTimeMillis();
+        }
+    });
+}      
+</code></pre>
+</div>
+
+<p>Android是消息驱动的模式，View.post的Runnable任务会被加入任务   队列，并且等待第一次TraversalRunnable执行结束后才执行。
+ViewRootImpl会调用两次performTraversals，View.post中代码在第一次performTraversals后执行。</p>
 
 
   </div>

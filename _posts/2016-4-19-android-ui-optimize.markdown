@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Android 流畅性优化"
-date:   2016-03-07 19:57:04 +0800
+date:   2016-04-19 13:55:04 +0800
 categories: Android Optimize
 ---
 # 1.过度绘制优化
@@ -10,7 +10,8 @@ Android对过度绘制有很方便的检测手段。(设置->开发者选项->�
 “显示过度绘制计数器”会统计某页面UI绘制的平均值，根据我个人的开发经验，2层左右的绘制是最优值，要优化超过3层的过度绘制。   
 **检查多余背景** ：多余背景是最容易出现过度绘制的原因。   
 **Theme引发过度绘制** 
-目前顺风车页面层级是这样的。   
+目前顺风车页面层级是这样的。  
+ 
 很明显绘制了两次背景，有两种方法优化：1.把Theme中的background去掉,具体页面使用特定背景色；2.使用Theme中的background作为统一背景色，页面根部局不再设置背景色。
 目前考虑到页面差异（如详情和列表背景色不一致），选择了第一种方式，修改方法是在Application和Activity的主题中都添加这行代码：
    
@@ -38,7 +39,7 @@ layout_weight属性的LinearLayout会在绘制时花费昂贵的系统资源，�
 
 
 # 3.减少不必要的view Inflate。  
-- **ViewStub**  
+**ViewStub**  
 不得不提到ViewStub.它提供了一种方便的LazyLoad方式处理View Inflate.回到业务场景，非常适合小概率需要显示的View做LazyLoad。
  
 ViewStub vs View.Gone?
@@ -53,8 +54,11 @@ Inflating a more complex layout, even when some views’ visibility are set to G
 
 # 4.TraceView分析优化  
 其他影响建议使用TraceView分析。TraceView是Android支持的一种，实时测量某时间区间cpu时间片函数调用情况。
-可能导致的数据解析，数据库操作，网络等。
+可能导致Ui卡顿的常见场景:数据解析，数据库操作，网络等。
+比如，Volley框架中Request putParam是在主线程的。如果参数过多，或者有加密操作，可能会消耗主线程过多时间。
 
+
+ 
 
 
 

@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Android 内存优化案例"
-date:   2016-03-07 19:57:04 +0800
-categories: jekyll update
+date:   2016-03-11 14:21:11 +0800
+categories: Android Optimize
 ---
 
 整理一下顺风车4.2.4版本中的内存优化案例。  
