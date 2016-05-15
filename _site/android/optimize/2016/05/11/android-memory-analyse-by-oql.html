@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>banking acticles</title>
-  <meta name="description" content="I am a Newcomer @ git.io-jekyll.
-">
+  <title>通过Mat利器OQL分析Android App内存</title>
+  <meta name="description" content="内存分析离不开Mat,在Mat上接触到了OQL.另：OQL对宏观上了解App组件的和JVM虚拟机的学习，也大有益处。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://yourdomain.com/">
+  <link rel="canonical" href="http://yourdomain.com/android/optimize/2016/05/11/android-memory-analyse-by-oql.html">
   <link rel="alternate" type="application/rss+xml" title="banking acticles" href="http://yourdomain.com/feed.xml">
 </head>
 
@@ -55,73 +54,64 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">通过Mat利器OQL分析Android App内存</h1>
+    <p class="post-meta"><time datetime="2016-05-11T10:41:17+08:00" itemprop="datePublished">May 11, 2016</time></p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">May 11, 2016</span>
+  <div class="post-content" itemprop="articleBody">
+    <p>内存分析离不开Mat,在Mat上接触到了OQL.
+另：OQL对宏观上了解App组件的和JVM虚拟机的学习，也大有益处。</p>
 
-        <h2>
-          <a class="post-link" href="/android/optimize/2016/05/11/android-memory-analyse-by-oql.html">通过Mat利器OQL分析Android App内存</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 9, 2016</span>
+<h1 id="oql">1.什么是OQL，如何使用</h1>
 
-        <h2>
-          <a class="post-link" href="/android/optimize/2016/05/09/android-multidex-optimize.html">Android MultiDex启动优化</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Apr 22, 2016</span>
+<p>在Mat中使用OQL.</p>
 
-        <h2>
-          <a class="post-link" href="/android/optimize/2016/04/22/android-test-page-launch-time.html">Android测量页面启动时间</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Apr 19, 2016</span>
+<h1 id="oql-1">2.OQL语法简介</h1>
+<p><strong>OQL支持的关键字</strong>
+OQL是类似SQL的一种语法。</p>
 
-        <h2>
-          <a class="post-link" href="/android/optimize/2016/04/19/android-ui-optimize.html">Android 流畅性优化</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Mar 11, 2016</span>
+<p>更多官方语法：
+http://help.eclipse.org/mars/index.jsp?topic=%2Forg.eclipse.mat.ui.help%2Freference%2Foqlsyntax.html</p>
 
-        <h2>
-          <a class="post-link" href="/android/optimize/2016/03/11/memory-optimize-example.html">Android 内存优化案例</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Mar 7, 2016</span>
+<p><strong>OQL语法特性</strong>
+INSTANCEOF关键字:查找属于某父类，实现某接口对象。</p>
 
-        <h2>
-          <a class="post-link" href="/jekyll/skill/2016/03/07/welcome-to-jekyll.html">Welcome to Jekyll!</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Mar 7, 2016</span>
+<p>@usedHeapSize：对象属性，占用内存值
+@retainedHeapSize：对象属性，
+@GCRootInfo：</p>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/03/07/android-memory-optimize.html">Android 内存优化方案和总结</a>
-        </h2>
-      </li>
-    
-  </ul>
+<p>支持正则：”java.lang..*”
+<strong>使用技巧</strong>
+常见Mat中使用，关心目标对象的占用内存(usedHeapSize)，引用对象占用内存（retainedHeapSize）。推荐在Select语句中标记显示这些属性。
+下面是一条OQL： <br />
+SELECT s AS Value, s.@usedHeapSize AS “Shallow Size”, s.@retainedHeapSize AS “Retained Size” FROM INSTANCEOF android.content.BroadcastReceiver s</p>
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+<h1 id="oql-2">3.十分实用的OQL语句</h1>
 
-</div>
+<p>1.查找所有Activity:  <br />
+作用：过滤出所有Activity实例。检查Activity泄露 <br />
+语句： SELECT * FROM INSTANCEOF android.support.v4.app.FragmentActivity  <br />
+说明：android.support.v4.app.FragmentActivity 可以替换为android.app.Activity；多个相同Activity实例可能存在泄露</p>
+
+<p>2.查找所有Fragment: <br />
+作用：查看Fragment泄露,如ViewPager多次切换可能泄露Fragment   实例 <br />
+语句：SELECT f AS Value, f.@usedHeapSize AS “Shallow Size”, f.@retainedHeapSize AS “Retained Size” FROM INSTANCEOF android.support.v4.app.Fragment f<br />
+说明：多个相同fragment实例可能存在泄露</p>
+
+<p>3.SELECT file.path.toString() FROM java.io.File file
+作用：查看文件目录</p>
+
+<p>4.查看所有字符串 <br />
+SELECT toString(s) AS Value, s.@usedHeapSize AS “Shallow Size”, s.@retainedHeapSize AS “Retained Size” FROM java.lang.String s</p>
+
+<p>#4.OQL Report</p>
+
+  </div>
+
+</article>
 
       </div>
     </div>
