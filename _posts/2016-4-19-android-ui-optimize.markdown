@@ -90,6 +90,7 @@ Inflating a more complex layout, even when some views’ visibility are set to G
 建议使用TraceView分析页面启动时间点的cpu消耗。TraceView可以准确测量某时间区间内cpu时间片各函数执行情况，关注非UI更新类型的cpu消耗。可能导致Ui卡顿的常见场景:数据解析，数据库操作，网络等。   
 **优化例子** 下面是一个页面启动时的TraceView分析图：
 ![place holder](http://121.42.160.4:8081/overdraw/http_put_params_traceview.jpg)
+可以看到，网络层封装http get参数占用了相当大比重的cpu时间片（约9%）。
 原因分析：Volley框架中Request putParam是在主线程的。如果参数过多，或者有大段字符加密操作，会消耗主线程过多时间。    
 优化方法：将大部分不变化的params做缓存，在内存中保留一个存放这些params的Map；在网络请求时直接执行putAll()操作。
  
