@@ -23,8 +23,8 @@ OQL是类似SQL的一种语法。
 **OQL语法特性**
 INSTANCEOF关键字:查找属于某父类，实现某接口对象。
 
-@usedHeapSize：对象属性，占用内存值
-@retainedHeapSize：对象属性，包含引用对象占用内存值
+@usedHeapSize：对象属性，获取占用内存值
+@retainedHeapSize：对象属性，获取包含引用对象占用总内存值
 @GCRootInfo：对象的垃圾回收根节点，判断是否被引用
 
 
@@ -34,7 +34,7 @@ INSTANCEOF关键字:查找属于某父类，实现某接口对象。
 下面是一条OQL：   
 SELECT s AS Value, s.@usedHeapSize AS "Shallow Size", s.@retainedHeapSize AS "Retained Size" FROM INSTANCEOF android.content.BroadcastReceiver s 
 
-# 3.十分实用的OQL语句
+# 3.Android中通用的OQL语句
 
 1.查找所有Activity:    
 作用：过滤出所有Activity实例。检查Activity泄露   
@@ -54,9 +54,15 @@ SELECT s AS Value, s.@usedHeapSize AS "Shallow Size", s.@retainedHeapSize AS "Re
 4.查看所有字符串   
 SELECT toString(s) AS Value, s.@usedHeapSize AS "Shallow Size", s.@retainedHeapSize AS "Retained Size" FROM java.lang.String s 
 
+# 4.业务使用的OQL语句
+1.查找所有自定义Widget:  
+比如说我现在项目的自定义Widget，都放在了com.didi.theonebts.widget包中，可以这样写OQL：   
+SELECT widget AS Value, widget.@usedHeapSize AS "Shallow Size", widget.@retainedHeapSize AS "Retained Size" FROM INSTANCEOF "com.didi.theonebts.widget.*" widget   
+2.
 
 
-#4.OQL Report
+
+#5.OQL Report
 
 参考文献
 更多官方语法：
