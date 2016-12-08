@@ -6,9 +6,91 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 11 May 2016 17:35:32 +0800</pubDate>
-    <lastBuildDate>Wed, 11 May 2016 17:35:32 +0800</lastBuildDate>
+    <pubDate>Fri, 23 Sep 2016 15:33:16 +0800</pubDate>
+    <lastBuildDate>Fri, 23 Sep 2016 15:33:16 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>学习github上的android开源工程</title>
+        <description>
+</description>
+        <pubDate>Fri, 19 Aug 2016 12:09:08 +0800</pubDate>
+        <link>http://yourdomain.com/learn/android/2016/08/19/learn-android-github-source-code.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/learn/android/2016/08/19/learn-android-github-source-code.html</guid>
+        
+        
+        <category>Learn</category>
+        
+        <category>Android</category>
+        
+      </item>
+    
+      <item>
+        <title>Mac上超级好用的效率工具</title>
+        <description>&lt;p&gt;Mac上的高效工具。  &lt;br /&gt;
+#1.Alfred
+目前稳定版是Alfred 2,Alfred 3添加了很多新功能，推荐使用。 &lt;br /&gt;
+Alfred某种程度上是spotlight替代品；支持更多自定义和其他关联功能。 &lt;br /&gt;
+&lt;strong&gt;免费版支持功能&lt;/strong&gt; &lt;br /&gt;
+1.关键词查找特定类型本地文件/应用程序 &lt;br /&gt;
+2.自定义Web Search：比如通过简单配置，终端输入「JD iphone」可以直接在京东搜索iphone &lt;br /&gt;
+3.关联计算器：在终端输入计算器语法，直接给出结果 &lt;br /&gt;
+4.词典关联翻译 &lt;br /&gt;
+&lt;strong&gt;付费版解锁功能&lt;/strong&gt;  &lt;br /&gt;
+1.Workflow功能:跳转Chrome到固定分页
+2.关联联系人 &lt;br /&gt;
+3.直接执行iTerm命令 &lt;br /&gt;
+4.支持关联自定义词典:    &lt;br /&gt;
+github上有很多优秀的词典,比如这一款： &lt;br /&gt;
+https://github.com/liberize/alfred-dict-workflow &lt;br /&gt;
+5.关联1Password &lt;br /&gt;
+6.管理检索剪贴板&lt;/p&gt;
+
+&lt;p&gt;#2.1Password
+1Password是一款强大的密码管理软件，特点是用一个主密码管理所有Web，App密码；多终端同步。 &lt;br /&gt;
+1Password试用版有30天试用期，过试用期之后，还能使用，但无法继续添加新的密码项。 &lt;br /&gt;
+&lt;strong&gt;安全性&lt;/strong&gt;
+推荐所有密码项都选择6-10位的随机密码，这样不会存在一家网站密码泄露，威胁其他账号的情况。&lt;br /&gt;
+本地加密（256位AES），本地储存；应用程序开发商也无法开启。 &lt;br /&gt;
+网络云同步（iCloud/Dropbox)数据也是加密后之后才同步。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;方便&lt;/strong&gt;
+1.顾名思义，你只需要记住一个主密码，管理你的其他账户密码。
+2.多终端同步，登陆账户即可。覆盖Windows,Mac,iphone,Android等多终端环境，无痛迁移。
+3.浏览器上可以一键填充密码（Mac上默认是command + |)。  &lt;br /&gt;
+4.浏览器上完成账号注册，密码修改；都会提示一键添加到1Password密码管理项中。&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 27 May 2016 16:30:19 +0800</pubDate>
+        <link>http://yourdomain.com/tools/2016/05/27/mac-tools.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/tools/2016/05/27/mac-tools.html</guid>
+        
+        
+        <category>tools</category>
+        
+      </item>
+    
+      <item>
+        <title>好用的工具汇总</title>
+        <description>&lt;p&gt;&lt;strong&gt;翻墙工具：Envacurpt&lt;/strong&gt;&lt;br /&gt;
+推荐购买 SSLedge Pro;价格是 600￥/year &lt;br /&gt;
+官网: https://eurekavpt.com/ ；官网有详细介绍  &lt;br /&gt;
+Mac使用文档：https://eurekavpt.com/page/use-ssledge-on-mac     &lt;br /&gt;
+需要的私信我要注册码。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;微信公众号&lt;/strong&gt; &lt;br /&gt;
+1.按住快捷键Ctrl+Alt+M，对Markdown文章进行渲染 &lt;br /&gt;
+2.封面头图，图片尺寸官方建议的是360x200像素，但是呢在手机微信上显示的图片会被标题挡住一部分。 &lt;br /&gt;
+3.多图文的二级缩略图是四方型显示的，那么图片最佳尺寸为200x200，或者宽、高相等不超过500为好。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 19 May 2016 18:09:57 +0800</pubDate>
+        <link>http://yourdomain.com/tools/2016/05/19/web-page-tools.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/tools/2016/05/19/web-page-tools.html</guid>
+        
+        
+        <category>tools</category>
+        
+      </item>
     
       <item>
         <title>通过Mat利器OQL分析Android App内存</title>
@@ -17,21 +99,23 @@
 
 &lt;h1 id=&quot;oql&quot;&gt;1.什么是OQL，如何使用&lt;/h1&gt;
 
-&lt;p&gt;在Mat中使用OQL.&lt;/p&gt;
+&lt;p&gt;Analyzing a Heap Dump Using Object Query Language,分析Java heap dump有重要意义。&lt;/p&gt;
+
+&lt;p&gt;There may be more than one Java class with the same name but loaded by different loader.&lt;/p&gt;
+
+&lt;p&gt;在Mat中使用OQL：分析详细，对了解工程代码有很多好处。
+缺点是：dump分析一次，操作略复杂。&lt;/p&gt;
 
 &lt;h1 id=&quot;oql-1&quot;&gt;2.OQL语法简介&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;OQL支持的关键字&lt;/strong&gt;
 OQL是类似SQL的一种语法。&lt;/p&gt;
 
-&lt;p&gt;更多官方语法：
-http://help.eclipse.org/mars/index.jsp?topic=%2Forg.eclipse.mat.ui.help%2Freference%2Foqlsyntax.html&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;OQL语法特性&lt;/strong&gt;
 INSTANCEOF关键字:查找属于某父类，实现某接口对象。&lt;/p&gt;
 
-&lt;p&gt;@usedHeapSize：对象属性，占用内存值
-@retainedHeapSize：对象属性，
-@GCRootInfo：&lt;/p&gt;
+&lt;p&gt;@usedHeapSize：对象属性，获取占用内存值
+@retainedHeapSize：对象属性，获取包含引用对象占用总内存值
+@GCRootInfo：对象的垃圾回收根节点，判断是否被引用&lt;/p&gt;
 
 &lt;p&gt;支持正则：”java.lang..*”
 &lt;strong&gt;使用技巧&lt;/strong&gt;
@@ -39,7 +123,7 @@ INSTANCEOF关键字:查找属于某父类，实现某接口对象。&lt;/p&gt;
 下面是一条OQL： &lt;br /&gt;
 SELECT s AS Value, s.@usedHeapSize AS “Shallow Size”, s.@retainedHeapSize AS “Retained Size” FROM INSTANCEOF android.content.BroadcastReceiver s&lt;/p&gt;
 
-&lt;h1 id=&quot;oql-2&quot;&gt;3.十分实用的OQL语句&lt;/h1&gt;
+&lt;h1 id=&quot;androidoql&quot;&gt;3.Android中通用的OQL语句&lt;/h1&gt;
 
 &lt;p&gt;1.查找所有Activity:  &lt;br /&gt;
 作用：过滤出所有Activity实例。检查Activity泄露 &lt;br /&gt;
@@ -49,7 +133,7 @@ SELECT s AS Value, s.@usedHeapSize AS “Shallow Size”, s.@retainedHeapSize AS
 &lt;p&gt;2.查找所有Fragment: &lt;br /&gt;
 作用：查看Fragment泄露,如ViewPager多次切换可能泄露Fragment   实例 &lt;br /&gt;
 语句：SELECT f AS Value, f.@usedHeapSize AS “Shallow Size”, f.@retainedHeapSize AS “Retained Size” FROM INSTANCEOF android.support.v4.app.Fragment f&lt;br /&gt;
-说明：多个相同fragment实例可能存在泄露&lt;/p&gt;
+说明：多个相同fragment实例可能存在泄露，同Activity&lt;/p&gt;
 
 &lt;p&gt;3.SELECT file.path.toString() FROM java.io.File file
 作用：查看文件目录&lt;/p&gt;
@@ -57,7 +141,18 @@ SELECT s AS Value, s.@usedHeapSize AS “Shallow Size”, s.@retainedHeapSize AS
 &lt;p&gt;4.查看所有字符串 &lt;br /&gt;
 SELECT toString(s) AS Value, s.@usedHeapSize AS “Shallow Size”, s.@retainedHeapSize AS “Retained Size” FROM java.lang.String s&lt;/p&gt;
 
-&lt;p&gt;#4.OQL Report&lt;/p&gt;
+&lt;h1 id=&quot;oql-2&quot;&gt;4.业务使用的OQL语句&lt;/h1&gt;
+&lt;p&gt;1.查找所有自定义Widget:&lt;br /&gt;
+比如说我现在项目的自定义Widget，都放在了com.didi.theonebts.widget包中，可以这样写OQL： &lt;br /&gt;
+SELECT widget AS Value, widget.@usedHeapSize AS “Shallow Size”, widget.@retainedHeapSize AS “Retained Size” FROM INSTANCEOF “com.didi.theonebts.widget.*” widget &lt;br /&gt;
+2.SELECT classof(cl) AS VALUE FROM INSTANCEOF java.lang.ClassLoader cl 
+查到所有的classloader&lt;/p&gt;
+
+&lt;p&gt;#5.OQL Report&lt;/p&gt;
+
+&lt;p&gt;参考文献
+更多官方语法：
+http://help.eclipse.org/mars/index.jsp?topic=%2Forg.eclipse.mat.ui.help%2Freference%2Foqlsyntax.html&lt;/p&gt;
 </description>
         <pubDate>Wed, 11 May 2016 10:41:17 +0800</pubDate>
         <link>http://yourdomain.com/android/optimize/2016/05/11/android-memory-analyse-by-oql.html</link>
@@ -181,44 +276,86 @@ private Runnable mLoadingRunnable = new Runnable() {
     
       <item>
         <title>Android 流畅性优化</title>
-        <description>&lt;h1 id=&quot;section&quot;&gt;1.过度绘制优化&lt;/h1&gt;
-&lt;p&gt;Android对过度绘制有很方便的检测手段。(设置-&amp;gt;开发者选项-&amp;gt;调试GPU过度绘制-&amp;gt;显示过度绘制区域/显示过度绘制计数器) &lt;br /&gt;
-&lt;strong&gt;过度绘制是什么&lt;/strong&gt; ：绘画了多次页面元素。
-“显示过度绘制计数器”会统计某页面UI绘制的平均值，根据我个人的开发经验，2层左右的绘制是最优值，要优化超过3层的过度绘制。 &lt;br /&gt;
-&lt;strong&gt;检查多余背景&lt;/strong&gt; ：多余背景是最容易出现过度绘制的原因。 &lt;br /&gt;
-&lt;strong&gt;Theme引发过度绘制&lt;/strong&gt; 
-目前顺风车页面层级是这样的。&lt;/p&gt;
+        <description>&lt;p&gt;页面流畅性是App非常重要的性能指标，下面总结一下流畅性优化容易出效果的点。
+# 1.过度绘制优化&lt;/p&gt;
 
-&lt;p&gt;很明显绘制了两次背景，有两种方法优化：1.把Theme中的background去掉,具体页面使用特定背景色；2.使用Theme中的background作为统一背景色，页面根部局不再设置背景色。
+&lt;p&gt;&lt;strong&gt;过度绘制检查&lt;/strong&gt; ：过度绘制指屏幕上的某个像素在同一帧的时间内被绘制了多次。
+多层次重叠的UI结构里面，如果不可见的UI也在做绘制的操作，会导致某些像素区域被绘制了多次，从而会浪费大量的CPU以及GPU资源。 &lt;br /&gt;
+过度绘制是页面流畅的大敌，Android对过度绘制有方便的检测手段：设置-&amp;gt;开发者选项-&amp;gt;调试GPU过度绘制-&amp;gt;显示过度绘制区域/显示过度绘制计数器。 &lt;br /&gt;
+“显示过度绘制计数器”会统计某页面UI绘制的平均值，根据我个人的开发经验，2层以内的绘制数是最优值，一定要优化超过3层的过度绘制。 &lt;br /&gt;
+&lt;strong&gt;检查多余背景&lt;/strong&gt; ：多余背景是最容易出现过度绘制的原因。通过细致的代码review可以发现很明显的多余背景；建议通过官方HierarchyViewer检查。    &lt;br /&gt;
+在成功Load View Hierarchy后，在DecorView中执行Profile Node，就可以在布局节点中看到每个view的UI显示情况；我们可以从DecorView一直跟踪到页面中具体Widget的背景，排查并去掉多余背景。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;优化Theme过度绘制&lt;/strong&gt; 
+举例来说，某页面层级是这样的： 
+&lt;img src=&quot;http://121.42.160.4:8081/overdraw/android_overdraw.png&quot; alt=&quot;place holder&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;DecorView绘制了主题背景，RelativeLayout@25ec597作为Activity根布局也绘制了背景。很明显这里有OverDraw，两种方法可以优化： &lt;br /&gt;
+1.把Theme中的background去掉,具体页面使用特定背景色； &lt;br /&gt;
+2.使用Theme中的background作为统一背景色，页面根部局不再设置背景色。 &lt;br /&gt;
 目前考虑到页面差异（如详情和列表背景色不一致），选择了第一种方式，修改方法是在Application和Activity的主题中都添加这行代码：&lt;/p&gt;
 
-&lt;p&gt;&amp;lt;item name=”android:windowBackground”&amp;gt;@null&amp;lt;/item&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;item name=”android:windowBackground”&amp;gt;@null&amp;lt;/item&amp;gt;    &lt;br /&gt;
+巧合的是，在Android Developer的官方blog中也提到了这种优化方式。&lt;sub&gt;&lt;font color=&quot;0099ff&quot; face=&quot;黑体&quot;&gt;[1]&lt;/font&gt;&lt;/sub&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;section-1&quot;&gt;2.优化布局层次&lt;/h1&gt;
-&lt;p&gt;对布局参数最准确是测量工具是Hierarchy Viewer. &lt;br /&gt;
-- &lt;strong&gt;include标签&lt;/strong&gt; 
-最重要的还是重用布局。对优化布局层次无作用&lt;br /&gt;
-&lt;strong&gt;merge标签&lt;/strong&gt; ：在可以使用时尽量使用。
-自定义布局，尽量少使用padding。这样可以使用merge标签&lt;/p&gt;
+&lt;h1 id=&quot;section&quot;&gt;2.优化布局层次&lt;/h1&gt;
+&lt;p&gt;同上，对布局层级最准确的检测工具是Hierarchy Viewer. &lt;br /&gt;
+&lt;strong&gt;include标签&lt;/strong&gt; 
+确切说是用来实现重用布局，做到NRY。对优化布局层次无作用。
+&lt;strong&gt;merge标签&lt;/strong&gt; ：
+在可以使用时尽量使用，使用场景：
+（1）父布局只有一个子布局，且该子布局和父布局是同一种布局时。
+（2）根布局是frameLayout时，可以将其替换成merge标签。
+（3）自定义布局时，尽量不使用padding；这样可以使用merge标签，减少一层布局。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;LinearLayout/RelativieLayout&lt;/strong&gt;
-一层的RelativeLayout效率高于二层LinearLayout.
-layout_weight属性的LinearLayout会在绘制时花费昂贵的系统资源，因为每一个子组件都需要被测量两次&lt;/p&gt;
+一层的RelativeLayout效率高于两层LinearLayout，所以复杂的布局多使用RelativeLayout。 &lt;br /&gt;
+如果相同层次的LinearLayout可以实现RelativeLayout的布局效果，显然使用LinearLayout。
+layout_weight属性的LinearLayout会在绘制时花费昂贵的系统资源，因为每一个子组件都需要被测量两次；请尽量少使用。&lt;/p&gt;
 
-&lt;h1 id=&quot;view-inflate&quot;&gt;3.减少不必要的view Inflate。&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;ViewStub&lt;/strong&gt;&lt;br /&gt;
-不得不提到ViewStub.它提供了一种方便的LazyLoad方式处理View Inflate.回到业务场景，非常适合小概率需要显示的View做LazyLoad。&lt;/p&gt;
+&lt;h1 id=&quot;view-inflate&quot;&gt;3.减少不必要的view Inflate&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;ViewStub&lt;/strong&gt;  这里不得不提到ViewStub的使用。它提供了一种方便的LazyLoad方式，来处理Activity OnCreate中大量View Inflate造成的卡顿问题。 &lt;br /&gt;
+回到业务场景，非常适合小概率需要显示的View使用：比如网络异常View,新手引导图等。  &lt;br /&gt;
+用户操作触发的View显示：如edittext获取焦点后弹出的表情输入View。&lt;/p&gt;
 
-&lt;p&gt;ViewStub vs View.Gone?
-我们在实际使用中，有很多布局是少概率出现的,比如网络异常布局，新手引导布局等。最合适的方式是使用ViewStub。 二者的效率差别参考
-&lt;a href=&quot;http://magicmicky.github.io/android_development/benchmark-using-traceview/&quot;&gt;这篇文章&lt;/a&gt;的第二个试验，作者测量了ViewStub和View.Gone消耗Cpu时间，大家有兴趣也自己试验一下。作者结论如下: &lt;br /&gt;
+&lt;p&gt;&lt;strong&gt;ViewStub vs Gone&lt;/strong&gt; 我们在实际使用中，有很多布局是少概率出现的,比如网络异常布局，新手引导布局等。最合适的方式是使用ViewStub。 二者的效率差别在
+参考文献2&lt;sub&gt;&lt;font color=&quot;0099ff&quot; face=&quot;黑体&quot;&gt;[2]&lt;/font&gt;&lt;/sub&gt;的第二个试验，作者测量了ViewStub和View.setVisibility(Gone)消耗Cpu时间，ViewStub的执行效率明显优于Gone. &lt;br /&gt;
+作者结论如下: &lt;br /&gt;
 Inflating a more complex layout, even when some views’ visibility are set to GONE, takes more time than inflating the simpler view, without the hidden views.&lt;/p&gt;
 
-&lt;h1 id=&quot;traceview&quot;&gt;4.TraceView分析优化&lt;/h1&gt;
-&lt;p&gt;其他影响建议使用TraceView分析。TraceView是Android支持的一种，实时测量某时间区间cpu时间片函数调用情况。
-可能导致Ui卡顿的常见场景:数据解析，数据库操作，网络等。
-比如，Volley框架中Request putParam是在主线程的。如果参数过多，或者有加密操作，可能会消耗主线程过多时间。&lt;/p&gt;
+&lt;h1 id=&quot;decorviewpost&quot;&gt;4.DecorView.post()&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;http://banking.github.io/android/optimize/2016/04/22/android-test-page-launch-time.html&quot;&gt;上篇文章&lt;/a&gt;提到过，可以根据DecorView.post来测量页面启动时间。
+同样此方案非常适合做页面启动时的流畅性优化,比如在updateYourUI()中执行影响页面启动性能的操作。示例代码如下：&lt;/p&gt;
 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;getWindow().getDecorView().post(new Runnable() {
+    @Override
+    public void run() {
+        myHandler.post(mLoadingRunnable);
+    }
+});    
+
+private Handler myHandler = new Handler();
+private Runnable mLoadingRunnable = new Runnable() {
+
+  @Override
+  public void run() {
+    updateYourUI(); 
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;traceview&quot;&gt;5.TraceView分析&lt;/h1&gt;
+&lt;p&gt;建议使用TraceView分析页面启动时间点的cpu消耗。TraceView可以准确测量某时间区间内cpu时间片各函数执行情况，关注非UI更新类型的cpu消耗。可能导致Ui卡顿的常见场景:数据解析，数据库操作，网络等。 &lt;br /&gt;
+&lt;strong&gt;优化例子&lt;/strong&gt; 下面是一个页面启动时的TraceView分析图：
+&lt;img src=&quot;http://121.42.160.4:8081/overdraw/http_put_params_traceview.jpg&quot; alt=&quot;place holder&quot; /&gt;
+可以看到，网络层封装http get参数占用了相当大比重的cpu时间片（约9%）。
+原因分析：Volley框架中Request putParam是在主线程的。如果参数过多，或者有大段字符加密操作，会消耗主线程过多时间。  &lt;br /&gt;
+优化方法：将大部分不变化的params做缓存，在内存中保留一个存放这些params的Map；在网络请求时直接执行putAll()操作。&lt;/p&gt;
+
+&lt;p&gt;参考文献：
+1.http://android-developers.blogspot.jp/2009/03/window-backgrounds-ui-speed.html
+2.http://magicmicky.github.io/android_development/benchmark-using-traceview/&lt;/p&gt;
 </description>
         <pubDate>Tue, 19 Apr 2016 13:55:04 +0800</pubDate>
         <link>http://yourdomain.com/android/optimize/2016/04/19/android-ui-optimize.html</link>
@@ -398,6 +535,9 @@ TheOne框架引中，引入了store管理activity逻辑的代码架构。提供�
 （1）IM详情页 发现了一个进入页面后所有gif表情，轮播多次的异常逻辑。已修复。&lt;br /&gt;
 （2）订单详情页 有内存泄露情况发生。&lt;br /&gt;
 （3）列表页pageNum = 30 导致回文过大（目前是160KB)，考虑优化pageNum = 15。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;5.追踪内存分配&lt;/h1&gt;
+&lt;p&gt;Allocation Traker来查看内存到底被什么占用了;获取alloc文件。&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 07 Mar 2016 19:57:04 +0800</pubDate>

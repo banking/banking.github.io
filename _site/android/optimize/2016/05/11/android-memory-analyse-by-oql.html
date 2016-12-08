@@ -67,21 +67,23 @@
 
 <h1 id="oql">1.什么是OQL，如何使用</h1>
 
-<p>在Mat中使用OQL.</p>
+<p>Analyzing a Heap Dump Using Object Query Language,分析Java heap dump有重要意义。</p>
+
+<p>There may be more than one Java class with the same name but loaded by different loader.</p>
+
+<p>在Mat中使用OQL：分析详细，对了解工程代码有很多好处。
+缺点是：dump分析一次，操作略复杂。</p>
 
 <h1 id="oql-1">2.OQL语法简介</h1>
 <p><strong>OQL支持的关键字</strong>
 OQL是类似SQL的一种语法。</p>
 
-<p>更多官方语法：
-http://help.eclipse.org/mars/index.jsp?topic=%2Forg.eclipse.mat.ui.help%2Freference%2Foqlsyntax.html</p>
-
 <p><strong>OQL语法特性</strong>
 INSTANCEOF关键字:查找属于某父类，实现某接口对象。</p>
 
-<p>@usedHeapSize：对象属性，占用内存值
-@retainedHeapSize：对象属性，
-@GCRootInfo：</p>
+<p>@usedHeapSize：对象属性，获取占用内存值
+@retainedHeapSize：对象属性，获取包含引用对象占用总内存值
+@GCRootInfo：对象的垃圾回收根节点，判断是否被引用</p>
 
 <p>支持正则：”java.lang..*”
 <strong>使用技巧</strong>
@@ -89,7 +91,7 @@ INSTANCEOF关键字:查找属于某父类，实现某接口对象。</p>
 下面是一条OQL： <br />
 SELECT s AS Value, s.@usedHeapSize AS “Shallow Size”, s.@retainedHeapSize AS “Retained Size” FROM INSTANCEOF android.content.BroadcastReceiver s</p>
 
-<h1 id="oql-2">3.十分实用的OQL语句</h1>
+<h1 id="androidoql">3.Android中通用的OQL语句</h1>
 
 <p>1.查找所有Activity:  <br />
 作用：过滤出所有Activity实例。检查Activity泄露 <br />
@@ -99,7 +101,7 @@ SELECT s AS Value, s.@usedHeapSize AS “Shallow Size”, s.@retainedHeapSize AS
 <p>2.查找所有Fragment: <br />
 作用：查看Fragment泄露,如ViewPager多次切换可能泄露Fragment   实例 <br />
 语句：SELECT f AS Value, f.@usedHeapSize AS “Shallow Size”, f.@retainedHeapSize AS “Retained Size” FROM INSTANCEOF android.support.v4.app.Fragment f<br />
-说明：多个相同fragment实例可能存在泄露</p>
+说明：多个相同fragment实例可能存在泄露，同Activity</p>
 
 <p>3.SELECT file.path.toString() FROM java.io.File file
 作用：查看文件目录</p>
@@ -107,7 +109,18 @@ SELECT s AS Value, s.@usedHeapSize AS “Shallow Size”, s.@retainedHeapSize AS
 <p>4.查看所有字符串 <br />
 SELECT toString(s) AS Value, s.@usedHeapSize AS “Shallow Size”, s.@retainedHeapSize AS “Retained Size” FROM java.lang.String s</p>
 
-<p>#4.OQL Report</p>
+<h1 id="oql-2">4.业务使用的OQL语句</h1>
+<p>1.查找所有自定义Widget:<br />
+比如说我现在项目的自定义Widget，都放在了com.didi.theonebts.widget包中，可以这样写OQL： <br />
+SELECT widget AS Value, widget.@usedHeapSize AS “Shallow Size”, widget.@retainedHeapSize AS “Retained Size” FROM INSTANCEOF “com.didi.theonebts.widget.*” widget <br />
+2.SELECT classof(cl) AS VALUE FROM INSTANCEOF java.lang.ClassLoader cl 
+查到所有的classloader</p>
+
+<p>#5.OQL Report</p>
+
+<p>参考文献
+更多官方语法：
+http://help.eclipse.org/mars/index.jsp?topic=%2Forg.eclipse.mat.ui.help%2Freference%2Foqlsyntax.html</p>
 
   </div>
 
